@@ -51,7 +51,7 @@ class MMessages
 
     public function get($key, $parameters = array())
     {
-        $msg = vsprintf($this->msg[$key], $parameters);
+        $msg = isset($this->msg[$key]) ? vsprintf($this->msg[$key], $parameters) : '';
         return $msg;
     }
 
@@ -61,5 +61,3 @@ class MMessages
     }
 
 }
-
-?>

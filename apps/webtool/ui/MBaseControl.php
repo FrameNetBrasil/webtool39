@@ -113,7 +113,7 @@ class MBaseControl extends MBase
             if ($selector != "") {
                 $value = $this->style->$selector;
             } else {
-                $value = $this->property->$property;
+                $value = $this->property->$property ?? null;
             }
         }
         return $value;

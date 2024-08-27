@@ -27,7 +27,7 @@ class Group extends map\GroupMap {
 
     public function listByFilter($filter = ''){
         $criteria = $this->getCriteria()->select('*')->orderBy('idGroup');
-        if ($filter->idGroup){
+        if (isset($filter->idGroup)){
             $criteria->where("idGroup LIKE '{$filter->idGroup}%'");
         }
         return $criteria;

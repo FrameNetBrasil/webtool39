@@ -193,7 +193,7 @@ class User extends map\UserMap
         $levels = Base::userLevel();
         $groups = $this->getArrayGroups();
         foreach ($levels as $level => $levelName) {
-            if ($groups[$level]) {
+            if (isset($groups[$level])) {
                 $userLevel = $level;
             }
         }

@@ -414,10 +414,10 @@ class MSQL
                 $this->_getJoin();
             }
 
-            $sqlText = 'SELECT ' . ($this->distinct ? 'DISTINCT ' : '') . implode($this->columns, ',');
+            $sqlText = 'SELECT ' . ($this->distinct ? 'DISTINCT ' : '') . implode(',', $this->columns);
 
             if (count($this->tables)) {
-                $sqlText .= ' FROM   ' . implode($this->tables, ',');
+                $sqlText .= ' FROM   ' . implode(',',$this->tables);
             }
 
             if ($this->where != '') {
@@ -425,7 +425,7 @@ class MSQL
             }
 
             if (count($this->groupBy)) {
-                $sqlText .= ' GROUP BY ' . implode($this->groupBy, ',');
+                $sqlText .= ' GROUP BY ' . implode(',',$this->groupBy);
             }
 
             if ($this->having != '') {
@@ -433,7 +433,7 @@ class MSQL
             }
 
             if (count($this->orderBy)) {
-                $sqlText .= ' ORDER BY ' . implode($this->orderBy, ',');
+                $sqlText .= ' ORDER BY ' . implode(',',$this->orderBy);
             }
         }
 

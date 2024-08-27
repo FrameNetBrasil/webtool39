@@ -27,6 +27,7 @@ class ViewFrameMap extends \MBusinessModel {
                 'entry' => array('column' => 'entry','type' => 'string'),
                 'active' => array('column' => 'active','type' => 'integer'),
                 'idEntity' => array('column' => 'idEntity','type' => 'integer'),
+                'idLanguage' => array('column' => 'idLanguage','type' => 'integer'),
             ),
             'associations' => array(
                 'entries' => array('toClass' => 'fnbr\models\ViewEntryLanguage', 'cardinality' => 'oneToOne' , 'keys' => 'entry:entry'),

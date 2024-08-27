@@ -83,6 +83,8 @@ class ViewFrame extends map\ViewFrameMap
         if ($filter->listBy == 'domain') {
             $criteria->where('toRelations.relationType', '=', "'rel_framal_domain'");
         }
+        $idLanguage = \Manager::getSession()->idLanguage;
+        $criteria->where('idLanguage', '=', $idLanguage);
         return $criteria;
     }
 

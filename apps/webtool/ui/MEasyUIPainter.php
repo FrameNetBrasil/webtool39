@@ -593,14 +593,14 @@ EOT;
 
     private function glyphicon($control)
     {
-        return $control->property->glyph ? "<div style='padding:3px' class='{$this->glyphclass($control)}' aria-hidden='true'></div>" : "";
+        return isset($control->property->glyph) ? "<div style='padding:3px' class='{$this->glyphclass($control)}' aria-hidden='true'></div>" : "";
     }
 
     public function mlinkbutton($control)
     {
         $control->options->iconCls = $control->property->iconCls ? : $control->property->icon;
         $control->options->plain = $control->property->plain;
-        $control->options->size = $control->property->size;
+        $control->options->size = $control->property->size ?? '';
         $glyph = $this->glyphicon($control);
         MAction::generate($control, $control->property->id);
         $control->plugin = 'linkbutton';
@@ -672,7 +672,7 @@ EOT;
     public function mmenuitem($control)
     {
         $control->property->text = $control->property->text ? : $control->property->label;
-        $control->options->iconCls = $control->property->icon ? : ($control->property->iconCls ? : $this->glyphclass($control));
+        $control->options->iconCls = isset($control->property->icon) ? : ($control->property->iconCls ?: $this->glyphclass($control));
         MAction::generate($control);
         $control->addControl($control->property->text);
         return $this->mdiv($control);
@@ -686,7 +686,8 @@ EOT;
     public function mmenubaritem($control)
     {
         $control->property->text = $control->property->label;
-        $control->options->iconCls = $control->property->icon ? : ($control->property->iconCls ? : $this->glyphclass($control));
+        $control->options->iconCls = isset($control->property->icon) ? : ($control->property->iconCls ? : $this->glyphclass($control));
+        $menus = '';
         foreach ($control->controls as $c) {
             if ($c->className == 'mmenu') {
                 $control->options->menu = '#' . $c->property->id;
@@ -726,7 +727,7 @@ EOT;
         $attributes = $this->getAttributes($control);
         if ($control->hasItems()) {
             $inner = $this->generateToString($control->controls);
-        } elseif ($control->property->cdata) {
+        } elseif (isset($control->property->cdata)) {
             $inner = $control->property->cdata;
         } else {
             $inner = $control->inner;

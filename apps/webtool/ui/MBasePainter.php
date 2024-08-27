@@ -86,6 +86,7 @@ class MBasePainter {
 
     public static function generateToString($element, $separator = '') {
         if (is_array($element)) {
+            $html = '';
             foreach ($element as $e) {
                 $html .= self::generateToString($e, $separator);
             }
@@ -146,7 +147,7 @@ class MBasePainter {
     public function mbasecontrol($control) {
         if ($control->hasItems()) {
             $inner = $this->generateToString($control->controls);
-        } elseif ($control->property->cdata) {
+        } elseif (isset($control->property->cdata)) {
             $inner = $control->property->cdata;
         } else {
             $inner = $control->inner;

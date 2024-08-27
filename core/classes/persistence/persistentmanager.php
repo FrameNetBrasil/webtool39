@@ -60,7 +60,7 @@ class PersistentManager implements \IPersistentManager
      */
     public function getClassMap($className, $mapClassName = '')
     {
-        $classMap = $this->classMaps[$className];
+        $classMap = $this->classMaps[$className] ?? false;
         if (!$classMap) {
             $classMap = $this->configLoader->getClassMap($className, $mapClassName);
             $this->addClassMap($className, $classMap);
@@ -742,7 +742,7 @@ class PersistentManager implements \IPersistentManager
      */
     public function getConnection($dbName)
     {
-        if (($conn = $this->dbConnections[$dbName]) == NULL) {
+        if (($conn = ($this->dbConnections[$dbName] ?? NULL)) == NULL) {
             $conn = self::$container->getDatabase($dbName);
             $this->dbConnections[$dbName] = $conn;
         }

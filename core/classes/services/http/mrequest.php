@@ -231,7 +231,7 @@ class MRequest
         if ($this->isFileUpload()) {
             return true;
         }
-        if ($_SERVER['HTTP_X_REQUESTED_WITH'] == '') {
+        if (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') == '') {
             return false;
         }
         return ($_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest");
@@ -251,7 +251,7 @@ class MRequest
 
     public function isFileUpload()
     {
-        return ($_REQUEST['__ISFILEUPLOAD'] == 'yes');
+        return (($_REQUEST['__ISFILEUPLOAD'] ?? '') == 'yes');
     }
 
     public function isPage()
