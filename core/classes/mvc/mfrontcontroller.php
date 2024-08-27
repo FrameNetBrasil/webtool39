@@ -39,8 +39,10 @@ class MFrontController
 
     public function __construct()
     {
+        Manager::logMessage('====================');
         Manager::logMessage('[RESET_LOG_MESSAGES]');
-        Manager::logMessage('[FrontController::construct]');
+        Manager::logMessage('====================');
+//        Manager::logMessage('[FrontController::construct]');
         $this->request = new MRequest();
         $this->response = new MResponse();
         $this->result = NULL;
@@ -73,7 +75,7 @@ class MFrontController
         Manager::setSession(new MSession($app));
         Manager::getSession()->init(mrequest('sid'));
         // trata dados
-        $this->removeInputSlashes();
+//        $this->removeInputSlashes();
         $this->setData($data ?: $_REQUEST);
         mtrace('DTO Data:');
         mtrace($this->getData());
@@ -97,10 +99,10 @@ class MFrontController
             Manager::setSession(new MSession($app));
             Manager::getSession()->init(mrequest('sid'));
             // trata dados
-            $this->removeInputSlashes();
+            //$this->removeInputSlashes();
             $this->setData($data ?: $_REQUEST);
-            mtrace('DTO Data:');
-            mtrace($this->getData());
+//            mtrace('DTO Data:');
+//            mtrace($this->getData());
             $this->loadExtensions();
             // cycle
             $this->init();
@@ -161,11 +163,15 @@ class MFrontController
                     }
                     $data->{$obj}->{$name} = $value;
                 } elseif (strpos($name, '_') !== false) {
-                    list($obj, $name, $extra) = explode('_', $name);
+                    $parts = explode('_', $name);
+                    $obj = $parts[0] ?? '';
+                    $name = $parts[1] ?? '';
+                    $extra = $parts[2] ?? '';
+                    //list($obj, $name, $extra = '') = explode('_', $name);
                     if ($name == '') {
                         $name = $extra;
                     }
-                    if ($data->{$obj} == '') {
+                    if (!isset($data->{$obj})) {
                         $data->{$obj} = (object)[];
                     }
                     $data->{$obj}->{$name} = $value;

@@ -9,7 +9,7 @@ class Valence
     {
         $cmd = <<<HERE
 select a.idAnnotationSet, IFNULL(lb.startChar,1000) startChar, lb.endChar, l.entry layerEntry, entry_it.entry itEntry, entry_it.name itName, entry_fe.entry feEntry,
-entry_fe.name feName, fe.idFRameElement feId, fe.typeEntry feTypeEntry, gf.name gfName, pt.name ptName
+entry_fe.name feName, fe.idFRameElement feId, fe.coreType feTypeEntry, gf.name gfName, pt.name ptName
 FROM view_lu lu 
 join View_AnnotationSet a on (lu.idLU = a.idLU)
 join View_Layer l on (a.idAnnotationSet = l.idAnnotationSet)

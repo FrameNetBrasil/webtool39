@@ -17,8 +17,8 @@ return [
         'painter' => 'EasyUI',
         'templateEngine' => 'latte',
         'defaultPassword' => 'default',
-        'pageTitle' => 'Webtool 3.7 [FNBr]',
-        'mainTitle' => 'Webtool 3.7 [FNBr/server4/webtool_docker]',
+        'pageTitle' => $_ENV['OPTIONS_PAGETITLE'],
+        'mainTitle' => $_ENV['OPTIONS_MAINTITLE'],
         'baseURL' => 'http://localhost/webtool'
     ],
     'ui' => [

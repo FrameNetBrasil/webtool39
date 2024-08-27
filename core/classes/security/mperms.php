@@ -94,7 +94,8 @@ class MPerms {
     public function getRights($login) {
         $user = Manager::getModelMAD('user');
         $user->getByLogin($login);
-        return $user->getRights($transaction);
+        //return $user->getRights($transaction);
+        return NULL;
     }
 
     public function getGroups($login) {

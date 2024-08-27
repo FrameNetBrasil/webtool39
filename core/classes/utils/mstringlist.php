@@ -29,7 +29,7 @@ class MStringList extends MList
 
     public function add($item, $key = NULL)
     {
-        $exists = $key ? $this->items[$key] : (array_search($item, $this->items) !== false);
+        $exists = $key ? ($this->items[$key] ?? false) : (array_search($item, $this->items) !== false);
         if (!$exists || $this->duplicates) {
             parent::add($item, $key);
         }

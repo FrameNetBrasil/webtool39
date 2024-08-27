@@ -151,7 +151,12 @@ class MScripts extends MBase
             $this->addOnload("manager.registerEvents(" . $events . ");");
         }
 
-        $scripts = new \StdClass;
+        $scripts = (object)[
+            'scripts' => '',
+            'code' => '',
+            'onload' => '',
+            'onsubmit' => '',
+        ];
 
         foreach ($this->scripts as $key => $url) {
             $scripts->scripts .= "\n manager.loader.load('{$url}');";

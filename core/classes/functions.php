@@ -126,18 +126,19 @@ function is_json($x) {
 function shutdown()
 {
     $error = error_get_last();
-    //if ($error) mdump($error);
-    Manager::errorHandler($error['type'], $error['message'], $error['file'], $error['line']);
-    if ($error['type'] & (E_ALL & ~E_NOTICE & ~E_STRICT)) {
-        if (Manager::isAjaxCall()) {
-            $ajax = Manager::getAjax();
-            $ob = ob_get_clean();
-            if ($ajax->isEmpty()) {
-                $ajax->setType('page');
-                $ajax->setData($ob);
+    if ($error) {
+        Manager::errorHandler($error['type'], $error['message'], $error['file'], $error['line']);
+        if ($error['type'] & (E_ALL & ~E_NOTICE & ~E_STRICT)) {
+            if (Manager::isAjaxCall()) {
+                $ajax = Manager::getAjax();
+                $ob = ob_get_clean();
+                if ($ajax->isEmpty()) {
+                    $ajax->setType('page');
+                    $ajax->setData($ob);
+                }
+                $result = $ajax->returnData();
+                echo $result;
             }
-            $result = $ajax->returnData();
-            echo $result;
         }
     }
 }

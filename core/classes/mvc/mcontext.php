@@ -176,7 +176,7 @@ class MContext
         $part = null;
         $component = '';
         $app = array_shift($pathParts);
-        mdump('=============== app = '. $app);
+//        mdump('=============== app = '. $app);
         if ($app != '') {
             if ($app == 'core') {
                 $this->isCore = true;
@@ -345,7 +345,7 @@ class MContext
                 $this->actionTokens[$i + 2] = $this->vars[$i] = $pathParts[$i];
             }
         }
-        $this->id = $_REQUEST['id'] ?: ($this->vars['item'] ?: $this->actionTokens[2]);
+        $this->id = $_REQUEST['id'] ?? $this->vars['item'] ?? $this->actionTokens[2] ?? '';
         if ($this->id !== '') {
             $_REQUEST['id'] = $this->id;
         }

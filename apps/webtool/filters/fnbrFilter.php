@@ -10,7 +10,7 @@ class fnbrFilter extends MFilter {
             $login = Manager::getLogin();
             $userIdLanguage = $login->getUser()->getConfigData('fnbrIdLanguage');
         }        
-        $idLanguage = $data->lang;
+        $idLanguage = $data->lang ?? '';
         if ($idLanguage == '') {
             $idLanguage = Manager::getSession()->idLanguage;
             if ($idLanguage == '') {
@@ -21,7 +21,7 @@ class fnbrFilter extends MFilter {
             }
         }
         Manager::getSession()->idLanguage = $idLanguage;
-        $db = $data->datasource ? : Manager::getConf('fnbr.db');
+        $db = $data->datasource ?? Manager::getConf('fnbr.db');
         Manager::setConf('fnbr.db', $db);
         Manager::setConf('options.language', Base::languages()[$idLanguage]);
     }

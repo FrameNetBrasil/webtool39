@@ -532,7 +532,7 @@ class Manager
     public static function autoload($className)
     {
         $class = strtolower($className);
-        $file = self::$instance->autoload[$class];
+        $file = self::$instance->autoload[$class] ?? '';
         if ($file != '') {
             if (file_exists($file)) {
                 include_once($file);
@@ -626,7 +626,7 @@ class Manager
      * Carrega configurações a partir de um arquivo conf.php.
      * @param string $configFile
      */
-    public function loadConf($configFile)
+    public static function loadConf($configFile)
     {
         $conf = require($configFile);
         self::$conf = MUtil::arrayMergeOverwrite(self::$conf, $conf);
@@ -636,7 +636,7 @@ class Manager
      * Carrega ações a partir de um arquivo actions.php.
      * @param string $actionsFile
      */
-    public function loadActions($actionsFile)
+    public static function loadActions($actionsFile)
     {
         if (file_exists($actionsFile)) {
             $actions = require($actionsFile);
@@ -648,7 +648,7 @@ class Manager
      * Carrega definições para Autoload de classes.
      * @param string $autoloadFile
      */
-    public function loadAutoload($autoloadFile)
+    public static function loadAutoload($autoloadFile)
     {
         $autoload = require($autoloadFile);
         self::$instance->autoload = array_merge(self::$instance->autoload, $autoload);
@@ -886,7 +886,7 @@ class Manager
     public static function import($namespace, $class = '', $extension = '.php')
     {
         $result = null;
-        if (self::$instance->import[$namespace]) {
+        if (isset(self::$instance->import[$namespace])) {
             $result = self::$instance->import[$namespace];
         } elseif (($class != '') && ($path = self::$instance->autoload[$class])) {
             $result = $path;
@@ -1546,7 +1546,7 @@ class Manager
         return $business;
     }
 
-    public function getModel($module, $name = 'main', $data = NULL)
+    public static function getModel($module, $name = 'main', $data = NULL)
     {
         $filename = self::getAppPath() . '/modules/' . $module . '/models/' . $name . '.php';
         if (file_exists($filename)) {
@@ -1612,7 +1612,7 @@ class Manager
     public static function getController($app, $module, $controller, $context = null)
     {
         $class = "{$controller}Controller";
-        if (self::$instance->controllers[$class]) {
+        if (isset(self::$instance->controllers[$class])) {
             self::$instance->logMessage("[getController  from cache]");
             return self::$instance->controllers[$class];
         }
@@ -2116,7 +2116,7 @@ class Manager
     public static function getSessionToken($create = true)
     {
         $container = self::getSession()->container('sessionKey');
-        if (!$container->key && $create) {
+        if (!isset($container->key) && $create) {
             $container->key = \MSSL::randomString(24);
         }
 

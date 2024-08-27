@@ -62,7 +62,7 @@ class MLogin
         $this->name = $user->getName();
         $this->idUser = $user->getId();
         $this->setGroups($user->getArrayGroups());
-        $this->setRights($user->getRights());
+//        $this->setRights($user->getRights());
         $this->weakPass = $user->weakPassword();
         $this->weakPass = false;
     }
@@ -73,7 +73,7 @@ class MLogin
         $this->name = $user->getName();
         $this->idUser = $user->getId();
         $this->setGroups($user->getArrayGroups($profile));
-        $this->setRights($user->getRights($profile));
+//        $this->setRights($user->getRights($profile));
     }
 
     public function getLogin()
@@ -119,7 +119,7 @@ class MLogin
     public function getRights($transaction = '')
     {
         if ($transaction) {
-            return array_key_exists($transaction, $this->rights) ? $this->rights[$transaction] : null;
+            return $this->rights[$transaction] ?? null;
         }
         return $this->rights;
     }

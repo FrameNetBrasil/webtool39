@@ -62,7 +62,7 @@ class MKrono
         throw new ERuntimeException('[MKrono Error]' . $msg);
     }
 
-    public function getDateTime($datetime, $format = '', $timeZone = '')
+    public static function getDateTime($datetime, $format = '', $timeZone = '')
     {
         $krono = MKrono::getInstance();
         if (is_string($datetime) && (trim($datetime) != '')) {
@@ -81,7 +81,7 @@ class MKrono
         return $dt;
     }
 
-    public function format($datetime, $format = '')
+    public static function format($datetime, $format = '')
     {
         $krono = MKrono::getInstance();
         $dt = $krono->getDateTime($datetime);
