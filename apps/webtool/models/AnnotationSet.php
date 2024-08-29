@@ -282,28 +282,6 @@ class AnnotationSet extends map\AnnotationSetMap
 
         $idLanguage = \Manager::getSession()->idLanguage;
 
-//        $cmd = <<<HERE
-//
-//        SELECT distinct a.idAnnotationSet,
-//            l.idLayer,
-//            fe.idEntity AS idLabelType,
-//            e.name AS labelType,
-//            fe.idColor,
-//            fe.typeEntry AS coreType,
-//            ti.info
-//        FROM View_AnnotationSet a
-//            INNER JOIN View_Layer l on (a.idAnnotationSet = l.idAnnotationSet)
-//            INNER JOIN View_SubCorpusLU sc on (a.idSubCorpus = sc.idSubCorpus)
-//            INNER JOIN View_LU lu on (sc.idLU = lu.idLU)
-//            INNER JOIN View_FrameElement fe on (lu.idFrame = fe.idFrame)
-//            INNER JOIN TypeInstance ti on (fe.typeEntry=ti.entry)
-//            INNER JOIN View_EntryLanguage e on (fe.entry = e.entry)
-//        WHERE (e.idLanguage = {$idLanguage} )
-//            AND (l.entry = 'lty_fe' )
-//            AND (a.idSentence = {$idSentence}) {$condition}
-//        ORDER BY a.idAnnotationSet, l.idLayer, ti.info, fe.typeEntry, e.name
-//HERE;
-
         $cmd = <<<HERE
 
         SELECT distinct a.idAnnotationSet,
@@ -311,18 +289,18 @@ class AnnotationSet extends map\AnnotationSetMap
             fe.idEntity AS idLabelType,
             e.name AS labelType,
             fe.idColor,
-            fe.typeEntry AS coreType,
+            fe.coreType AS coreType,
             ti.info
         FROM View_AnnotationSet a
             INNER JOIN View_Layer l on (a.idAnnotationSet = l.idAnnotationSet)
             INNER JOIN View_LU lu on (a.idLU = lu.idLU)
             INNER JOIN View_FrameElement fe on (lu.idFrame = fe.idFrame)
-            INNER JOIN TypeInstance ti on (fe.typeEntry=ti.entry)
+            INNER JOIN TypeInstance ti on (fe.coreType=ti.entry)
             INNER JOIN View_EntryLanguage e on (fe.entry = e.entry)
         WHERE (e.idLanguage = {$idLanguage} )
             AND (l.entry = 'lty_fe' )
             AND (a.idSentence = {$idSentence}) {$condition}
-        ORDER BY a.idAnnotationSet, l.idLayer, ti.info, fe.typeEntry, e.name
+        ORDER BY a.idAnnotationSet, l.idLayer, ti.info, fe.coreType, e.name
 HERE;
 
         $query = $this->getDb()->getQueryCommand($cmd);

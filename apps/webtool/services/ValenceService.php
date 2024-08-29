@@ -57,7 +57,7 @@ class ValenceService extends MService
 FROM view_lu lu join view_subcorpuslu v1 on (lu.idLU = v1.idLU)
 join view_annotationset v2 on (v1.idSubCorpus = v2.idSubCorpus)
 join (
-select a.idAnnotationSet, a.idSentence, a.idSubCorpus, l.idLayer, l.entry layerEntry, lb.idLabel, entry_it.entry itEntry, entry_it.name itName, entry_fe.name feName, fe.idFRameElement feId, fe.typeEntry feTypeEntry, gl.name glName, lb.startChar, lb.endChar
+select a.idAnnotationSet, a.idSentence, a.idSubCorpus, l.idLayer, l.entry layerEntry, lb.idLabel, entry_it.entry itEntry, entry_it.name itName, entry_fe.name feName, fe.idFRameElement feId, fe.coreType feTypeEntry, gl.name glName, lb.startChar, lb.endChar
 from View_AnnotationSet a
 join View_Layer l on (a.idAnnotationSet = l.idAnnotationSet)
 join Label lb on (l.idLayer = lb.idLayer)

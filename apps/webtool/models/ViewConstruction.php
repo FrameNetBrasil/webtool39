@@ -65,7 +65,7 @@ class ViewConstruction extends map\ViewConstructionMap
         mdump('==== listByLanguageFilter');
         $idLanguage = \Manager::getSession()->idLanguage;
 
-        $criteria = $this->getCriteria()->select('idLanguage, language.description language, idConstruction, entry, active, idEntity, name')->orderBy('name');
+        $criteria = $this->getCriteria()->select('idLanguage, language.description language, idConstruction, entry, active, idEntity, name, cxIdLanguage')->orderBy('name');
         //Base::entryLanguage($criteria);
         if ($filter->idConstruction) {
             $criteria->where("idConstruction = {$filter->idConstruction}");
@@ -98,7 +98,10 @@ class ViewConstruction extends map\ViewConstructionMap
             $criteria->where("Domain.idDomain = {$filter->idDomain}");
         }
         if ($filter->idLanguage) {
-            $criteria->where("cxIdLanguage = {$filter->idLanguage}");
+            $criteria->where("idLanguage = {$filter->idLanguage}");
+        }
+        if ($filter->cxIdLanguage) {
+            $criteria->where("cxIdLanguage = {$filter->cxIdLanguage}");
         }
         $criteria->where('idLanguage', '=', $idLanguage);
         return $criteria;

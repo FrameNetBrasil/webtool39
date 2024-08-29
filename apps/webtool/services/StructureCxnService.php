@@ -29,8 +29,9 @@ class StructureCxnService extends MService
     {
         $listLanguages = Base::languagesDescription();
         $cxn = new fnbr\models\ViewConstruction();
-        $filter = (object)['idDomain' => $data->idDomain, 'ce' => $data->ce, 'cxn' => $data->cxn, 'active' => $data->active, 'idLanguage' => $idLanguage];
-        $languages = $cxn->listByLanguageFilter($filter)->asQuery()->treeResult('idLanguage', 'idConstruction,name,entry');
+        $filter = (object)['idDomain' => $data->idDomain, 'ce' => $data->ce, 'cxn' => $data->cxn, 'active' => $data->active, 'cxIdLanguage' => $idLanguageFilter];
+        $languages = $cxn->listByLanguageFilter($filter)->asQuery()->treeResult('cxIdLanguage', 'idConstruction,name,entry');
+        mdump($languages);
         $result = [];
         if ($idLanguageFilter == '') {
             foreach ($languages as $idLanguage => $language) {
