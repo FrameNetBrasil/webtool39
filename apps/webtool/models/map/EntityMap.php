@@ -24,7 +24,7 @@ class EntityMap extends \MBusinessModel {
             'table' => 'entity',
             'attributes' => array(
                 'idEntity' => array('column' => 'idEntity','key' => 'primary','idgenerator' => 'identity','type' => 'integer'),
-                'alias' => array('column' => 'alias','type' => 'string'),
+//                'alias' => array('column' => 'alias','type' => 'string'),
                 'type' => array('column' => 'type','type' => 'string'),
                 'idOld' => array('column' => 'idOld','type' => 'integer'),
             ),

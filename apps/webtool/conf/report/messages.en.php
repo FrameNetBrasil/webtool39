@@ -71,4 +71,5 @@ return array(
     'rel_constraint_uperson' => 'Constraint UD Person',
     'rel_constraint_wordform' => 'Constraint Wordform',
     'rel_constraint_xor' => 'Constraint Xor',
+    'rel_hasconcept' => 'Comparative Concepts',
 );
