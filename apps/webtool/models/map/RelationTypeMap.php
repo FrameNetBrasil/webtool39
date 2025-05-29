@@ -25,10 +25,10 @@ class RelationTypeMap extends \MBusinessModel {
             'attributes' => array(
                 'idRelationType' => array('column' => 'idRelationType','key' => 'primary','idgenerator' => 'identity','type' => 'integer'),
                 'entry' => array('column' => 'entry','type' => 'string'),
-                'nameEntity1' => array('column' => 'nameEntity1','type' => 'string'),
-                'nameEntity2' => array('column' => 'nameEntity2','type' => 'string'),
+                //'nameEntity1' => array('column' => 'nameEntity1','type' => 'string'),
+                //'nameEntity2' => array('column' => 'nameEntity2','type' => 'string'),
                 'idRelationGroup' => array('column' => 'idRelationGroup','type' => 'integer'),
-                'idDomain' => array('column' => 'idDomain','type' => 'integer'),
+                //'idDomain' => array('column' => 'idDomain','type' => 'integer'),
                 'idEntity' => array('column' => 'idEntity','type' => 'integer'),
             ),
             'associations' => array(
