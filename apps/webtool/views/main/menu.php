@@ -13,11 +13,6 @@ class Menu extends MMenuBar
             if (($i == 'profile') || ($i == 'language')) {
                 continue;
             }
-            mdump("===============================++");
-            mdump($i);
-            mdump($group);
-
-            //$hasAccessGroup = ($group[ACTION_ACCESS] == '') || Manager::checkAccess($group[ACTION_TRANSACTION], $group[ACTION_ACCESS]);
             $hasAccessGroup = ($group[ACTION_ACCESS] == '') || $login->isMemberOf($group[ACTION_TRANSACTION]);
             if ($hasAccessGroup) {
                 $menuBarItem[$i] = new MMenuBarItem(array("id" => "menu{$i}", "label" => _M($group[ACTION_CAPTION]), "iconCls" => $group[ACTION_ICON]));
